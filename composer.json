@@ -1,0 +1,17 @@
+{
+    "name": "wollnerstudios/assetpipeline",
+    "description": "asset pipeline",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Lee",
+            "email": "dan@wollnerstudios.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Wollnerstudios\\AssetPipeline\\": "src"
+        }
+    }
+}
