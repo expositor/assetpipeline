@@ -26,7 +26,17 @@ $registeredAssets =
 			'version' => '2.1.4',
 			'js'=>['https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'],
 			'jsMin' => ['jquery.min.js'],
-		]		
+		]
+	],
+	'slick slider' => 
+	[
+		[
+			'version' => '1.5.6',
+			'css'=>['slick-1.5.6/slick/slick.css'],
+			'js'=>['slick-1.5.6/slick/slick.js'],
+			'cssMin' => ['slick-1.5.6/slick/slick.css'],
+			'jsMin' => ['slick-1.5.6/slick/slick.min.js'],
+		],	
 	],
 	'Open Sans' => 
 	[

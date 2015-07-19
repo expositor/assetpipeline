@@ -7,7 +7,7 @@ $pipeline->setAssetPath('src/assets/');
 $pipeline->addAsset('Open Sans')->withoutBaseURL();
 $pipeline->addAsset('jQuery')->version('2.1.4')->withoutBaseURL();
 $pipeline->addAsset('bootstrap');
-
+$pipeline->addAsset('slick slider');
 
 ?>
 <!DOCTYPE html>
