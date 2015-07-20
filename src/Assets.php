@@ -28,6 +28,13 @@ $registeredAssets =
 			'jsMin' => ['jquery.min.js'],
 		]
 	],
+	'skrollr' => 
+	[
+		[
+			'version' => '0.6.29',
+			'js'=>['skrollr/src/skrollr.js'],
+		],
+	],	
 	'slick slider' => 
 	[
 		[
@@ -45,6 +52,12 @@ $registeredAssets =
 			'css'=>['http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'],
 		]
 	],
-
+	'slick forms' => 
+	[
+		[
+			'version' => '1.0.0',
+			'css'=>['slick-forms/ContactForms/css/slick_ffb.css'],
+		]
+	],
 
 ];
