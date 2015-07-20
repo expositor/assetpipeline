@@ -5,10 +5,12 @@ $pipeline = new AssetPipeline();
 //$pipeline->setBaseURL('google.com/');
 $pipeline->setAssetPath('src/assets/');
 $pipeline->addAsset('Open Sans')->withoutBaseURL();
+$pipeline->addAsset('font awesome');
 $pipeline->addAsset('jQuery')->version('2.1.4')->withoutBaseURL();
 $pipeline->addAsset('bootstrap');
 $pipeline->addAsset('skrollr');
 $pipeline->addAsset('slick slider');
+$pipeline->addAsset('slider revolution');
 $pipeline->addAsset('slick forms');
 
 ?>
@@ -61,7 +63,7 @@ $pipeline->addAsset('slick forms');
 
       <div class="starter-template">
         <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <p class="lead"> <i class="fa fa-facebook"></i> Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
       </div>
 
     </div><!-- /.container -->

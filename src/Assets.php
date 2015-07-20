@@ -14,7 +14,13 @@ $registeredAssets =
 		],
 
 	],
-
+	'font awesome' => 
+	[
+		[
+			'version' => '4.3.0',
+			'css'=>['font-awesome-4.3.0/css/font-awesome.css'],
+		],
+	],
 	'jQuery' => 
 	[
 		[
@@ -34,6 +40,14 @@ $registeredAssets =
 			'version' => '0.6.29',
 			'js'=>['skrollr/src/skrollr.js'],
 		],
+	],
+	'slider revolution' => 
+	[
+		[
+			'version' => '4.6.4',
+			'css'=>['sliderrevolution/src/css/style.css','sliderrevolution/src/rs-plugin/css/settings.css'],
+			'js'=>['sliderrevolution/src/rs-plugin/js/jquery.themepunch.tools.min.js','sliderrevolution/src/rs-plugin/js/jquery.themepunch.revolution.min.js'],
+		],	
 	],	
 	'slick slider' => 
 	[
