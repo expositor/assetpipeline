@@ -12,7 +12,6 @@ $registeredAssets =
 			'cssMin' => ['bootstrap-3.3.5/css/bootstrap.min.css'],
 			'jsMin' => ['bootstrap-3.3.5/js/bootstrap.min.js'],
 		],
-
 	],
 	'font awesome' => 
 	[
@@ -41,6 +40,14 @@ $registeredAssets =
 			'js'=>['skrollr/src/skrollr.js'],
 		],
 	],
+	'magnific popup' => 
+	[
+		[
+			'version' => '1.0.0',
+			'css'=>['Magnific-Popup/dist/magnific-popup.css'],
+			'js'=>['Magnific-Popup/dist/jquery.magnific-popup.js'],
+		],	
+	],	
 	'slider revolution' => 
 	[
 		[

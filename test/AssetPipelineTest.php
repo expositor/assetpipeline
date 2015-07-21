@@ -4,13 +4,14 @@ use Wollnerstudios\AssetPipeline\AssetPipeline;
 $pipeline = new AssetPipeline();
 //$pipeline->setBaseURL('google.com/');
 $pipeline->setAssetPath('src/assets/');
-$pipeline->addAsset('Open Sans')->withoutBaseURL();
-$pipeline->addAsset('font awesome');
-$pipeline->addAsset('jQuery')->version('2.1.4')->withoutBaseURL();
+$pipeline->addCSS('Open Sans')->withoutBaseURL();
+$pipeline->addCSS('font awesome');
+$pipeline->addJS('jQuery')->version('2.1.4')->withoutBaseURL();
 $pipeline->addAsset('bootstrap');
 $pipeline->addAsset('skrollr');
 $pipeline->addAsset('slick slider');
 $pipeline->addAsset('slider revolution');
+$pipeline->addAsset('magnific popup');
 $pipeline->addAsset('slick forms');
 
 ?>

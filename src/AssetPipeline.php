@@ -3,9 +3,9 @@
 namespace Wollnerstudios\AssetPipeline;
 require ('../vendor/autoload.php');
 
-//ini_set('display_errors',1);
-//ini_set('display_startup_errors',1);
-//error_reporting(-1);
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(-1);
 
 
 class AssetPipeline
@@ -14,20 +14,23 @@ class AssetPipeline
 	protected $baseurl;
 
 	protected $assetPath;
-	
+
 	protected $fullAssetPath;
-	
+
 	protected $registeredAssets;
-	
+
 	protected $addedAssetName;
-	
+
+	protected $addMethodName;
+
 	protected $addedCSS;
-	
+
 	protected $addedJS;
+
 
 	public function __construct()
 	{
-		
+
 		require_once 'Assets.php';
 
 		$this->registeredAssets = $registeredAssets;
@@ -70,17 +73,23 @@ class AssetPipeline
 		return $this->fullAssetPath = $this->baseurl.$this->assetPath; 
 	}
 
-	public function addAsset($assetName)
+	private function createCSSHTML($css)
 	{
+		return '<link href="'.$this->fullAssetPath.''.$css.'" rel="stylesheet">';
+	}
 
-		$this->addedAssetName = $assetName;
+	private function createJSHTML($js)
+	{
+		return '<script src="'.$this->fullAssetPath.''.$js.'"></script>';
+	}
 
+	private function addCSSToList($assetName)
+	{
+		
 		$this->addedCSS[$this->addedAssetName] = null;
 
-		$this->addedJS[$this->addedAssetName] = null;
-
 		$temporaryAsset = $this->registeredAssets[$assetName];
-		
+
 		usort($temporaryAsset, function($a,$b){
 
 			return $b['version'] - $a['version'];
@@ -92,50 +101,102 @@ class AssetPipeline
 
 			foreach ($temporaryAsset[0]['css'] as $css)
 			{
-				$this->addedCSS[$this->addedAssetName][] .= '<link href="'.$this->fullAssetPath.''.$css.'" rel="stylesheet">';
+				$this->addedCSS[$this->addedAssetName][] .= $this->createCSSHTML($css);
 			}
 		}
+
+		return;
+	}
+
+	private function addJSToList($assetName)
+	{
+		$this->addedJS[$this->addedAssetName] = null;
+
+		$temporaryAsset = $this->registeredAssets[$assetName];
+
+		usort($temporaryAsset, function($a,$b){
+
+			return $b['version'] - $a['version'];
+
+		});
 
 		if (isset($temporaryAsset[0]['js']))
 		{
 
 			foreach ($temporaryAsset[0]['js'] as $js)
 			{
-				$this->addedJS[$this->addedAssetName][] .= '<script src="'.$this->fullAssetPath.''.$js.'"></script>';
+				$this->addedJS[$this->addedAssetName][] .= $this->createJSHTML($js);
 			}
 		}
+
+		return;
+	}
+
+	public function addAsset($assetName)
+	{
+
+		$this->addMethodName = 'addAsset';
+
+		$this->addedAssetName = $assetName;
+
+		$this->addCSSToList($this->addedAssetName);
+
+		$this->addJSToList($this->addedAssetName);
+
+		return $this;
+	}
+
+	public function addCSS($assetName)
+	{
+		$this->addMethodName = 'addCSS';
+
+		$this->addedAssetName = $assetName;
+		
+		$this->addCSSToList($this->addedAssetName);
+
+		return $this;
+	}
+
+	public function addJS($assetName)
+	{
+		$this->addMethodName = 'addJS';
+
+		$this->addedAssetName = $assetName;
+
+		$this->addJSToList($this->addedAssetName);
 
 		return $this;
 	}
 
 	public function version($versionNumber)
 	{
+
 		$temporaryAsset = $this->registeredAssets[$this->addedAssetName];
 
 		$key = array_search($versionNumber, array_column($temporaryAsset,'version'));
-		
+
 		$this->addedCSS[$this->addedAssetName] = null;
 
 		$this->addedJS[$this->addedAssetName] = null;
 
-		if (isset($temporaryAsset[$key]['css']))
+		if (($this->addMethodName == 'addAsset' || $this->addMethodName == 'addCSS') && isset($temporaryAsset[$key]['css']))
 		{
 
 			foreach ($temporaryAsset[$key]['css'] as $css)
 			{
 
-				$this->addedCSS[$this->addedAssetName][] .= '<link href="'.$this->fullAssetPath.''.$css.'" rel="stylesheet">';
+				$this->addedCSS[$this->addedAssetName][] .=  $this->createCSSHTML($css);
 			}
 
 		}
 
-		if (isset($temporaryAsset[$key]['js']))
+		if (($this->addMethodName == 'addAsset' || $this->addMethodName == 'addJS') && isset($temporaryAsset[$key]['js']))
 		{
 
 			foreach ($temporaryAsset[$key]['js'] as $js)
 			{
 
-				$this->addedJS[$this->addedAssetName][] .= '<script src="'.$this->fullAssetPath.''.$js.'"></script>';
+				$this->addedJS[$this->addedAssetName][] .= $this->createJSHTML($js);
 			}
 
 		}
@@ -144,10 +205,9 @@ class AssetPipeline
 
 	}
 	
-
 	public function withoutBaseURL()
 	{
-		
+
 		if (isset($this->addedCSS[$this->addedAssetName]))
 		{
 			foreach ($this->addedCSS[$this->addedAssetName] as $key=>$value)
@@ -167,24 +227,55 @@ class AssetPipeline
 		return;
 	}
 
-	public function showCSS()
+	public function showAssetList($singleAsset = null)
 	{
 
 		foreach ($this->addedCSS as $css)
 		{
-			
+
 			if (isset($css))
 			{
-			
+
 				foreach($css as $css)
 				{
 					echo $css."\r\n";
-				}				
+				}
+			}
+		}
+
+		foreach ($this->addedJS as $js)
+		{
+			if (isset($js))
+			{
+				foreach($js as $js)
+				{
+					echo $js."\r\n";
+				}
 			}
 		}
 
 		return;
 	}
+
+	public function showCSS()
+	{
+
+		foreach ($this->addedCSS as $css)
+		{
+
+			if (isset($css))
+			{
+
+				foreach($css as $css)
+				{
+					echo $css."\r\n";
+				}
+			}
+		}
+
+		return;
+	}
+
 
 	public function showJS()
 	{
@@ -199,8 +290,8 @@ class AssetPipeline
 				}
 			}
 		}
+
 		return;
 	}
-
 
 }
