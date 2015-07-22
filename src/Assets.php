@@ -47,6 +47,22 @@ $registeredAssets =
 			'css'=>['Magnific-Popup/dist/magnific-popup.css'],
 			'js'=>['Magnific-Popup/dist/jquery.magnific-popup.js'],
 		],	
+	],
+	'wow' =>
+	[
+		[
+			'version' => '1.1.2',
+			'css'=>['wowJS/dist/animate.css'],
+			'js'=>['wowJS/dist/wow.min.js'],
+		],	
+	],
+	'waves' =>
+	[
+		[
+			'version' => '0.7.2',
+			'css'=>['waves/dist/waves.min.css'],
+			'js'=>['waves/dist/waves.min.js'],
+		],	
 	],	
 	'slider revolution' => 
 	[

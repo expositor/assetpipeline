@@ -1,13 +1,16 @@
 <?php
 require ('../vendor/autoload.php');
+
 use Wollnerstudios\AssetPipeline\AssetPipeline;
+
 $pipeline = new AssetPipeline();
-//$pipeline->setBaseURL('google.com/');
 $pipeline->setAssetPath('src/assets/');
 $pipeline->addCSS('Open Sans')->withoutBaseURL();
 $pipeline->addCSS('font awesome');
 $pipeline->addJS('jQuery')->version('2.1.4')->withoutBaseURL();
 $pipeline->addAsset('bootstrap');
+$pipeline->addAsset('wow');
+$pipeline->addAsset('waves');
 $pipeline->addAsset('skrollr');
 $pipeline->addAsset('slick slider');
 $pipeline->addAsset('slider revolution');
@@ -38,33 +41,14 @@ $pipeline->addAsset('slick forms');
   </head>
 
   <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
+    
+   
     <div class="container">
-
+ <div class="moo" style="background-color:orange;width:50px;height:50px"></div>
       <div class="starter-template">
         <h1>Bootstrap starter template</h1>
         <p class="lead"> <i class="fa fa-facebook"></i> Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <a href="#" class="button">Click Here</a>
       </div>
 
     </div><!-- /.container -->
@@ -74,5 +58,9 @@ $pipeline->addAsset('slick forms');
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 <?= $pipeline->showJS(); ?>
+<script>
+  Waves.attach('.moo',['waves-block']);
+  Waves.init();
+</script>
   </body>
 </html>
